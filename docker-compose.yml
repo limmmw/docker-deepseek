@@ -1,4 +1,4 @@
-#version: '3.9'
+version: '3.9' # INI PERBAIKAN UTAMA
 
 services:
   ollama:
@@ -9,16 +9,18 @@ services:
       - ollama_data:/root/.ollama
     ports:
       - "11434:11434"
-    entrypoint: /bin/sh -c "ollama serve & sleep 5 && ollama pull deepseek-r1:7b && wait"
 
   webui:
-    image: ghcr.io/open-webui/open-webui:main
+    image: ghcr.io/open-webui/open-webui:v0.6.30
     container_name: open-webui
     restart: unless-stopped
     environment:
       - OLLAMA_API_BASE_URL=http://ollama:11434/api
+      - WEBUI_SECRET_KEY=KEY_SECRET_HAHAH_WKWKWK
+      - PORT=8080 
+      - LOG_LEVEL=debug
     ports:
-      - "3000:8080"
+      - "3001:8080"
     depends_on:
       - ollama
 
