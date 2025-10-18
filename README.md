@@ -1,4 +1,4 @@
-#  🔥RUNNING DEEPSEEK AI ON LOCAL SERVER USING DOCKER CONTAINER
+#  🔥RUNNING DEEPSEEK AI+WEBUI ON LOCAL SERVER USING DOCKER CONTAINER
 
 - download the repo:
     ```bash
@@ -15,6 +15,20 @@
     ```bash
     docker-compose down
     ```
+## pulling AI models
+```bash
+docker exec -it ollama bash
+ollama run deepseek-r1:1.5b #depending on models you want to pull
+```
+or 
+```bash
+docker exec -it ollama ollama run deepseek-r1:1.5b
+```
+you can check the installed models:
+```bash
+docker exec -it ollama ollama list
+```
+
 ## REVERSE PROXY [OPTIONAL]
 if you want to use reverse proxy with nginx in your system, use ai.conf file
 
