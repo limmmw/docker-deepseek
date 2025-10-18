@@ -1,5 +1,4 @@
-version: '3.9' # INI PERBAIKAN UTAMA
-
+version: '3.9'
 services:
   ollama:
     image: ollama/ollama:latest
@@ -11,18 +10,22 @@ services:
       - "11434:11434"
 
   webui:
-    image: ghcr.io/open-webui/open-webui:v0.6.30
+    image: ghcr.io/open-webui/open-webui:latest
     container_name: open-webui
     restart: unless-stopped
     environment:
-      - OLLAMA_API_BASE_URL=http://ollama:11434/api
+      - OLLAMA_BASE_URL=http://ollama:11434
       - WEBUI_SECRET_KEY=KEY_SECRET_HAHAH_WKWKWK
-      - PORT=8080 
       - LOG_LEVEL=debug
     ports:
-      - "3001:8080"
+      - "3000:8080"
+    volumes:
+      - webui_data:/app/backend/data
     depends_on:
       - ollama
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
 volumes:
   ollama_data:
+  webui_data:
