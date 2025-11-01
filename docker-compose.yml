@@ -8,24 +8,7 @@ services:
       - ollama_data:/root/.ollama
     ports:
       - "11434:11434"
-
-  webui:
-    image: ghcr.io/open-webui/open-webui:latest
-    container_name: open-webui
-    restart: unless-stopped
-    environment:
-      - OLLAMA_BASE_URL=http://ollama:11434
-      - WEBUI_SECRET_KEY=KEY_SECRET_HAHAH_WKWKWK
-      - LOG_LEVEL=debug
-    ports:
-      - "3000:8080"
-    volumes:
-      - webui_data:/app/backend/data
-    depends_on:
-      - ollama
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+    tty: true
 
 volumes:
-  ollama_data:
-  webui_data:
+  ollama_data: {}
